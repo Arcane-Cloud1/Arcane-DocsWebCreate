@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Arcane Logo](/src/img/logo.png)
+![Arcane Logo](./src/img/logo.png)
 
 **Anti-Template Documentation Generator**
 
