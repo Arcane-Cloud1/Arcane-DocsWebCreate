@@ -1,0 +1,342 @@
+/* Global Variables & Reset */
+:root {
+  /* Light Theme (Default) */
+  --bg-color: #f0f0f0;
+  --text-color: #1a1a1a;
+  --accent-color: #ff4757;
+  --border-color: #000;
+  --sidebar-bg: #fff;
+  --header-bg: #fff;
+  --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  
+  --border-width: 2px;
+  --shadow-offset: 8px;
+  --shadow-color: rgba(0,0,0,0.2);
+  --font-code: 'Courier New', monospace;
+
+  /* Landing Page Variables */
+  --landing-bg: #fff;
+  --landing-text: #000;
+  --landing-accent: #000;
+  --landing-accent-text: #ccff00;
+  --landing-secondary: #666;
+  --landing-watermark: rgba(0, 0, 0, 0.03);
+  --landing-border: #e0e0e0;
+
+  /* Sticker Variables */
+  --sticker-bg: #fff;
+  --sticker-border: #000;
+  --sticker-text: #000;
+  --sticker-shadow: rgba(0,0,0,0.1);
+}
+
+[data-theme='dark'] {
+  /* Dark Theme Overrides */
+  --bg-color: #0a0a0a;
+  --text-color: #e0e0e0;
+  --accent-color: #ccff00;
+  --border-color: #333;
+  --sidebar-bg: #111;
+  --header-bg: rgba(10, 10, 10, 0.8);
+  --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
+  
+  --border-width: 1px;
+  --shadow-offset: 0px;
+  --shadow-color: transparent;
+  --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+  --overlay-bg: rgba(0, 0, 0, 0.8);
+  --accent-text: #000;
+
+  /* Landing Page Variables */
+  --landing-bg: #0a0a0a;
+  --landing-text: #fff;
+  --landing-accent: #ccff00;
+  --landing-accent-text: #000;
+  --landing-secondary: #888;
+  --landing-watermark: rgba(255, 255, 255, 0.03);
+  --landing-border: #333;
+
+  /* Sticker Variables */
+  --sticker-bg: #111;
+  --sticker-border: #333;
+  --sticker-text: #fff;
+  --sticker-shadow: rgba(0,0,0,0.5);
+}
+
+body {
+  margin: 0;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--noise-url);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+}
+
+/* Header */
+.theme-header {
+  padding: 1rem 2rem;
+  border-bottom: var(--border-width) solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--header-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: all 0.3s;
+}
+
+[data-theme='dark'] .theme-header {
+  padding: 1.5rem 3rem;
+  backdrop-filter: blur(10px);
+  border-bottom: none; /* Dark theme has no border on header usually, or just 1px transparent? Let's keep it clean */
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  color: var(--text-color);
+}
+
+[data-theme='dark'] .logo {
+  color: #fff;
+}
+
+.logo span {
+  color: var(--accent-color);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #888;
+  margin-left: 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s;
+}
+
+[data-theme='dark'] .nav-links a:hover {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+/* Layout Containers */
+.theme-container {
+  padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+}
+
+/* Sidebar */
+.theme-sidebar {
+  width: 280px;
+  position: fixed;
+  top: 80px; /* Adjust if header height changes */
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  padding: 2rem;
+  background: var(--sidebar-bg);
+  z-index: 50;
+  border-right: var(--border-width) solid var(--border-color);
+}
+
+[data-theme='dark'] .theme-sidebar {
+  border-right: 1px solid var(--border-color);
+}
+
+.theme-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.theme-sidebar li {
+  margin-bottom: 0.8rem;
+}
+
+.theme-sidebar a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+/* Light Theme Sidebar Links */
+[data-theme='light'] .theme-sidebar a:hover {
+    background: #000;
+    color: #fff;
+}
+[data-theme='light'] .theme-sidebar a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Dark Theme Sidebar Links */
+[data-theme='dark'] .theme-sidebar a {
+    color: #666;
+}
+[data-theme='dark'] .theme-sidebar a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+[data-theme='dark'] .theme-sidebar a.active {
+    color: var(--accent-color);
+    background: rgba(204, 255, 0, 0.1);
+}
+
+/* Main Content */
+.theme-main {
+  flex: 1;
+  margin-left: 280px;
+  padding: 3rem 5rem;
+  max-width: 900px;
+}
+
+.theme-footer {
+  margin-left: 280px;
+  padding: 2rem 5rem;
+  border-top: var(--border-width) solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  background: var(--bg-color);
+}
+
+[data-theme='dark'] .theme-footer {
+  border-top: 1px solid #333;
+  color: #666;
+}
+
+/* Language Switcher */
+.lang-switch, .theme-switch {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 1rem;
+    color: #888;
+    transition: color 0.3s;
+    display: inline-block;
+}
+
+.lang-switch:hover, .theme-switch:hover {
+    color: var(--text-color);
+}
+[data-theme='dark'] .lang-switch:hover, [data-theme='dark'] .theme-switch:hover {
+    color: #fff;
+}
+
+/* MARKDOWN STYLES */
+.markdown-body {
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-top: 2rem;
+    color: var(--text-color);
+}
+
+/* Light Theme Markdown */
+[data-theme='light'] .markdown-body h1 {
+    font-size: 3rem;
+    border-bottom: 4px solid #000;
+    padding-bottom: 0.5rem;
+}
+[data-theme='light'] .markdown-body code {
+    background: #000;
+    color: #0f0;
+    padding: 0.2rem 0.4rem;
+    font-family: var(--font-code);
+    font-weight: bold;
+}
+[data-theme='light'] .markdown-body pre {
+    background: #000;
+    color: #ccc;
+    padding: 1rem;
+    border: 2px solid #000;
+    overflow-x: auto;
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+}
+[data-theme='light'] .markdown-body blockquote {
+    border-left: 4px solid #000;
+    margin: 0;
+    padding-left: 1rem;
+    font-style: italic;
+    background: #e0e0e0;
+    padding: 1rem;
+}
+
+/* Dark Theme Markdown */
+[data-theme='dark'] .markdown-body {
+    line-height: 1.8;
+}
+[data-theme='dark'] .markdown-body h1 {
+    font-size: 3.5rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+    color: #fff;
+    border-bottom: none;
+}
+[data-theme='dark'] .markdown-body h2 {
+    font-size: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    color: #fff;
+}
+[data-theme='dark'] .markdown-body p {
+    color: #aaa;
+}
+[data-theme='dark'] .markdown-body code {
+    background: #222;
+    color: var(--accent-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: var(--font-code);
+}
+[data-theme='dark'] .markdown-body pre {
+    background: #111;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: none;
+}
+[data-theme='dark'] .markdown-body blockquote {
+    border-left: 4px solid var(--accent-color);
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+    background: transparent;
+    font-style: normal;
+}
