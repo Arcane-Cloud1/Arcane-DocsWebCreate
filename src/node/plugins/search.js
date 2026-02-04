@@ -16,13 +16,14 @@ export function searchPlugin(root) {
     },
     async load(id) {
       if (id === resolvedVirtualModuleId) {
+        const tutorialDir = path.resolve(root, 'tutorial');
         const files = await fg('**/*.md', { 
-            cwd: root, 
+            cwd: tutorialDir, 
             ignore: ['node_modules', 'dist', '.git'] 
         });
         
         const searchIndex = await Promise.all(files.map(async file => {
-          const absolutePath = path.resolve(root, file);
+          const absolutePath = path.resolve(tutorialDir, file);
           const raw = await fs.readFile(absolutePath, 'utf-8');
           const { data, content } = matter(raw);
           

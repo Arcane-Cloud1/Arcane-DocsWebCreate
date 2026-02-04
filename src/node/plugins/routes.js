@@ -14,15 +14,16 @@ export function routesPlugin(root, clientRoot) {
     },
     async load(id) {
       if (id === resolvedVirtualModuleId) {
+        const tutorialDir = path.resolve(root, 'tutorial');
         const files = await fg('**/*.md', { 
-            cwd: root, 
+            cwd: tutorialDir, 
             ignore: ['node_modules', 'dist', '.git'] 
         });
         
         const routes = files.map(file => {
           const name = file.replace(/\.md$/, '');
           const pathName = name === 'README' || name === 'index' ? '/' : `/${name}`;
-          const componentPath = path.resolve(root, file).replace(/\\/g, '/');
+          const componentPath = path.resolve(tutorialDir, file).replace(/\\/g, '/');
           
           return `
             {
