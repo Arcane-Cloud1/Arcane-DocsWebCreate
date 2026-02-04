@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Arcane Logo](https://via.placeholder.com/150x40?text=ARCANE)
+![Arcane Logo](/src/img/logo.png)
 
 **反模板主义文档生成器**
 
