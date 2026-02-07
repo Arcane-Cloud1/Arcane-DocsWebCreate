@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Arcane Logo](./src/img/logo.png)
+![Arcane Logo](./src/img/logo.ico)
 
 **Anti-Template Documentation Generator**
 
@@ -53,7 +53,7 @@ export default {
     text: 'Arcane',
     suffix: '.'
   },
-  github: 'https://github.com/your-repo',
+  github: 'https://github.com/Arcane-Cloud1/Arcane-DocsWebCreate',
   // ...
 }
 ```
